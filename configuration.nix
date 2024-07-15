@@ -70,17 +70,20 @@
   environment = {
     systemPackages = with pkgs; [
       brave
+      eza
+      ferdium
+      git
       mullvad-browser
+      nix-zsh-completions
+      python3
+      python3Packages.requests
+      tor-browser
       vim
       wget
       zsh
       zsh-autocomplete
       zsh-autosuggestions
       zsh-syntax-highlighting
-      nix-zsh-completions
-      git
-      tor-browser
-      ferdium
     ];
   };
 
