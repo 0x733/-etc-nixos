@@ -6,6 +6,7 @@
   boot = {
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
+    initrd.luks.devices."luks-170e091d-c709-4958-96b4-a2f4687b6b99".device = "/dev/disk/by-uuid/170e091d-c709-4958-96b4-a2f4687b6b99";
   };
 
   networking = {
@@ -59,7 +60,9 @@
       isNormalUser = true;
       description = "user";
       extraGroups = [ "networkmanager" "wheel" ];
-      packages = with pkgs; [ kdePackages.kate ];
+      packages = with pkgs; [
+        kdePackages.kate
+      ];
       shell = pkgs.zsh;
     };
   };
@@ -76,6 +79,8 @@
       zsh-syntax-highlighting
       nix-zsh-completions
       git
+      tor-browser
+      ferdium
     ];
   };
 
@@ -89,13 +94,7 @@
       ohMyZsh = {
         enable = true;
         theme = "bira";
-        plugins.git.enable = true;
-        plugins.sudo.enable = true;
-        plugins.web-search.enable = true;
-        plugins.python.enable = true;
-        plugins.pip.enable = true;
-        plugins.history-substring-search.enable = true;
-        plugins.colored-man-pages.enable = true;
+        plugins = [ "git" "sudo" "web-search" "python" "pip" "history-substring-search" "colored-man-pages" ];
       };
     };
     kdeconnect.enable = true;
@@ -108,4 +107,6 @@
     };
     stateVersion = "24.05";
   };
+
+  nixpkgs.config.allowUnfree = true;
 }
