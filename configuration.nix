@@ -1,5 +1,10 @@
 { config, pkgs, ... }:
 
+let
+  pythonEnv = pkgs.python3.withPackages (ps: [ ps.requests ]);
+
+in
+
 {
   imports = [ ./hardware-configuration.nix ];
 
@@ -7,7 +12,6 @@
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
     initrd.luks.devices."luks-170e091d-c709-4958-96b4-a2f4687b6b99".device = "/dev/disk/by-uuid/170e091d-c709-4958-96b4-a2f4687b6b99";
-    kernelPackages = pkgs.linuxKernel.kernels.linux_xanmod_latest;
   };
 
   networking = {
@@ -74,10 +78,12 @@
       eza
       ferdium
       git
+      kdePackages.kate
       mullvad-browser
+      nerdfonts
       nix-zsh-completions
-      python3
-      python3Packages.requests
+      noto-fonts
+      pythonEnv
       tor-browser
       vim
       wget
