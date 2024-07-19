@@ -74,19 +74,25 @@ in
 
   environment = {
     systemPackages = with pkgs; [
+      android-tools
       brave
+      cfspeedtest
       eza
-      ferdium
       git
       kdePackages.kate
       mullvad-browser
       nerdfonts
       nix-zsh-completions
       noto-fonts
+      noto-fonts-emoji
       pythonEnv
+      speedtest-cli
+      starship
       tor-browser
       vim
+      whatsapp-for-linux
       wget
+      wine
       zsh
       zsh-autocomplete
       zsh-autosuggestions
@@ -108,6 +114,17 @@ in
       };
     };
     kdeconnect.enable = true;
+    starship = {
+      enable = true;
+      settings = {
+        add_newline = false;
+        character = {
+          success_symbol = "[➜](bold #00FF00)";  # Green
+          error_symbol = "[➜](bold #FF0000)";  # Red
+        };
+
+        };
+    };
   };
 
   system = {
@@ -119,4 +136,5 @@ in
   };
 
   nixpkgs.config.allowUnfree = true;
-}
+
+  }
